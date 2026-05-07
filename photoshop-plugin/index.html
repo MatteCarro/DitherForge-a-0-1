@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>DitherForge</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ps-panel">
+    <!-- Window chrome -->
+    <div class="chrome">
+      <span class="chrome-btn" title="Collapse">«</span>
+      <span class="chrome-btn x" title="Close">×</span>
+    </div>
+    <div class="tabs">
+      <div class="tab">DitherForge</div>
+      <div class="tabs-spacer"></div>
+      <div class="menu-btn" id="menuButton" title="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" y1="7" x2="20" y2="7"/>
+          <line x1="4" y1="12" x2="20" y2="12"/>
+          <line x1="4" y1="17" x2="20" y2="17"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="body">
+      <!-- Brand -->
+      <div class="brand">
+        <div class="brand-logo">
+          <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+            <rect x="3" y="3" width="32" height="32" rx="4" stroke="#8B5CF6" stroke-width="2" fill="none"/>
+            <rect x="8" y="8" width="3" height="3" rx="0.5" fill="#8B5CF6"/>
+            <rect x="13" y="8" width="3" height="3" rx="0.5" fill="#8B5CF6"/>
+            <rect x="18" y="8" width="3" height="3" rx="0.5" fill="#8B5CF6"/>
+            <rect x="23" y="8" width="3" height="3" rx="0.5" fill="#8B5CF6"/>
+            <rect x="8" y="13" width="3" height="3" rx="0.5" fill="#8B5CF6"/>
+            <rect x="18" y="13" width="3" height="3" rx="0.5" fill="#8B5CF6"/>
+            <rect x="23" y="13" width="3" height="3" rx="0.5" fill="#8B5CF6"/>
+            <rect x="8" y="18" width="3" height="3" rx="0.5" fill="#8B5CF6"/>
+            <rect x="13" y="18" width="3" height="3" rx="0.5" fill="#8B5CF6"/>
+            <rect x="23" y="18" width="3" height="3" rx="0.5" fill="#8B5CF6"/>
+            <rect x="13" y="23" width="3" height="3" rx="0.5" fill="#8B5CF6"/>
+            <rect x="23" y="23" width="3" height="3" rx="0.5" fill="#8B5CF6"/>
+            <rect x="8" y="28" width="3" height="3" rx="0.5" fill="#8B5CF6" opacity="0.6"/>
+            <rect x="18" y="28" width="3" height="3" rx="0.5" fill="#8B5CF6" opacity="0.6"/>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-name">Dither<span class="accent">Forge</span></div>
+          <div class="brand-tag">Dithering professionale<br/>per retro gaming</div>
+        </div>
+      </div>
+
+      <!-- Console / Target -->
+      <div class="section">
+        <div class="section-label">
+          Console / Target
+          <span class="help-icon tip-right">?<span class="tip">Scegli una console di riferimento: bit-depth, palette, algoritmo e scala vengono preimpostati.</span></span>
+        </div>
+        <div id="consoleGrid" class="console-grid"></div>
+      </div>
+
+      <!-- Bit depth -->
+      <div class="section">
+        <div class="section-label">
+          Bit depth
+          <span class="help-icon tip-right">?<span class="tip">Numero di bit per pixel della palette finale. Meno bit = meno colori e look più retrò.</span></span>
+        </div>
+        <div id="bitGrid" class="bit-grid"></div>
+      </div>
+
+      <!-- Scala pixel -->
+      <div class="section">
+        <div class="section-label">
+          Scala pixel
+          <span class="help-icon tip-right">?<span class="tip">Quanto "grossi" sono i pixel finali. L'immagine viene rimpicciolita prima del dithering e poi riportata alle dimensioni originali con pixel quadrati. 1× mantiene la risoluzione originale.</span></span>
+        </div>
+        <div id="scaleGrid" class="bit-grid"></div>
+        <div class="scale-row">
+          <span>Zoom pixel</span>
+          <div class="scale-control">
+            <input id="scaleSlider" type="range" min="1" max="8" step="1" value="2" />
+            <span id="scaleValue">2×</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Algorithm -->
+      <div class="section">
+        <div class="section-label">
+          Algoritmo di dithering
+          <span class="help-icon tip-right">?<span class="tip">Determina come l'immagine viene suddivisa nei colori della palette. Bayer = pattern regolare, Floyd-Steinberg/Atkinson = diffusione errore organica.</span></span>
+        </div>
+        <div class="select-shell">
+          <span id="algoThumb" class="select-thumb"></span>
+          <select id="algoSelect" class="select-native"></select>
+          <span class="select-caret">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9a9aa0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </div>
+        <div id="algoDescription" class="help"></div>
+      </div>
+
+      <!-- Palette -->
+      <div class="section">
+        <div class="section-label">
+          Palette
+          <span class="help-icon tip-right">?<span class="tip">Set di colori utilizzato per il rendering. Le palette console-accurate riproducono i limiti hardware reali.</span></span>
+        </div>
+        <div class="select-shell">
+          <span id="paletteThumb" class="select-thumb palette-thumb"></span>
+          <select id="paletteSelect" class="select-native"></select>
+          <span class="select-caret">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9a9aa0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </div>
+        <div id="swatches" class="swatches"></div>
+        <div id="checkForcePalette" class="check-row checked">
+          <span class="check-box">
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6.5 5 9 10 3.5"/></svg>
+          </span>
+          <span>Forza colori palette</span>
+          <span class="help-icon tip-right">?<span class="tip">Quando attivo, ogni pixel viene mappato esattamente al colore più vicino della palette. Disattivato = consenti colori intermedi.</span></span>
+        </div>
+      </div>
+
+      <!-- Options -->
+      <div class="section">
+        <div class="section-label">Opzioni</div>
+        <div class="toggle-row">
+          <span>Dithering serpeggiante</span>
+          <span class="help-icon tip-left">?<span class="tip">Scansione a serpentina (sinistra→destra→sinistra). Riduce i pattern verticali tipici della diffusione errore.</span></span>
+          <div class="spacer"></div>
+          <span id="toggleSerpentine" class="toggle on"></span>
+        </div>
+        <div class="toggle-row">
+          <span>Mantieni trasparenza</span>
+          <span class="help-icon tip-left">?<span class="tip">Conserva il canale alfa originale del livello senza applicare dithering ai pixel trasparenti.</span></span>
+          <div class="spacer"></div>
+          <span id="toggleKeepAlpha" class="toggle"></span>
+        </div>
+      </div>
+
+      <!-- Preview / Info -->
+      <div class="section">
+        <div class="section-label">Anteprima</div>
+        <div class="info-card">
+          <span class="info-ic">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/>
+              <line x1="12" y1="11" x2="12" y2="16"/>
+              <circle cx="12" cy="8" r="0.8" fill="#8B5CF6" stroke="none"/>
+            </svg>
+          </span>
+          <div>
+            <div id="summaryTop" class="top"></div>
+            <div id="summaryBottom" class="bottom"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action bar -->
+      <div class="action-bar">
+        <span style="position:relative">
+          <div id="resetButton" class="icon-btn" title="Reset">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3 3 3 9 9 9"/>
+              <path d="M3 9a9 9 0 1 0 3-6.7"/>
+            </svg>
+          </div>
+          <span class="help-icon tip-right" style="position:absolute;top:-3px;right:-3px;width:11px;height:11px;font-size:8px">?<span class="tip">Ripristina tutte le impostazioni ai valori predefiniti.</span></span>
+        </span>
+        <span style="position:relative">
+          <div id="previewButton" class="icon-btn active" title="Anteprima live">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </div>
+          <span class="help-icon" style="position:absolute;top:-3px;right:-3px;width:11px;height:11px;font-size:8px">?<span class="tip">Attiva/disattiva l'anteprima live sul livello selezionato.</span></span>
+        </span>
+        <div class="spacer"></div>
+        <button id="applyButton" class="apply">APPLICA</button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="foot">
+      <span>DitherForge v1.1.0</span>
+      <span>by aCreami</span>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="dither.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
