@@ -186,13 +186,14 @@ button { border: none; background: none; cursor: pointer; }
 .console-cell svg {
   display: block;
   width: 22px; height: 22px;
-  min-width: 22px; min-height: 22px;
   fill: none; stroke: currentColor;
   stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round;
 }
 .console-cell svg circle { fill: currentColor; stroke: none; }
-.console-cell svg rect[fill="currentColor"],
-.console-cell svg path[fill="currentColor"] { fill: currentColor; }
+.console-cell svg .btn { fill: currentColor; stroke: none; }
+.console-cell svg .screen { fill: none; stroke: currentColor; }
+.console-cell svg .screen-color { fill: currentColor; fill-opacity: 0.25; stroke: currentColor; }
+.console-cell svg .screen-dim { fill: currentColor; fill-opacity: 0.18; stroke: currentColor; }
 
 /* Bit depth */
 .bit-grid {

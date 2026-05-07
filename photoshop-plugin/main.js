@@ -21,69 +21,58 @@ function findById(list, id) {
   return list.find((i) => i.id === id) || list[0];
 }
 
-/* ── Console SVG icons — fill/stroke esplicito su ogni elemento per UXP ── */
-function consoleIcon(id, color) {
-  const C = color || FG_DIM;
+/* ── Console SVG icons ── */
+function consoleIcon(id) {
+  const S = 'xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"';
   const icons = {
-    custom: `<svg viewBox="0 0 24 24" fill="none" stroke="${C}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    custom: `<svg ${S}>
       <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
-      <circle cx="9" cy="7" r="2" fill="${C}" stroke="none"/>
-      <circle cx="15" cy="12" r="2" fill="${C}" stroke="none"/>
-      <circle cx="7" cy="17" r="2" fill="${C}" stroke="none"/>
+      <circle cx="9" cy="7" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="7" cy="17" r="2"/>
     </svg>`,
-    gb: `<svg viewBox="0 0 24 24" fill="none" stroke="${C}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="6" y="3" width="12" height="18" rx="2" fill="none"/>
-      <rect x="8" y="6" width="8" height="6" rx="0.5" fill="none"/>
-      <circle cx="9.5" cy="16" r="0.9" fill="${C}" stroke="none"/>
-      <circle cx="14.5" cy="16" r="0.9" fill="${C}" stroke="none"/>
-      <line x1="8.5" y1="19" x2="11" y2="19"/>
-      <line x1="13" y1="19" x2="15.5" y2="19"/>
+    gb: `<svg ${S}>
+      <rect x="6" y="3" width="12" height="18" rx="2"/>
+      <rect x="8" y="6" width="8" height="6" rx="0.5" class="screen"/>
+      <circle cx="9.5" cy="16" r="0.9"/><circle cx="14.5" cy="16" r="0.9"/>
+      <line x1="8.5" y1="19" x2="11" y2="19"/><line x1="13" y1="19" x2="15.5" y2="19"/>
     </svg>`,
-    gbc: `<svg viewBox="0 0 24 24" fill="none" stroke="${C}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="6" y="3" width="12" height="18" rx="2" fill="none"/>
-      <rect x="8" y="6" width="8" height="6" rx="0.5" fill="${C}" fill-opacity="0.25"/>
-      <circle cx="9" cy="15.5" r="1.2" fill="${C}" stroke="none" opacity="0.85"/>
-      <rect x="13" y="14.5" width="2.5" height="2" rx="0.4" fill="${C}" stroke="none" opacity="0.85"/>
+    gbc: `<svg ${S}>
+      <rect x="6" y="3" width="12" height="18" rx="2"/>
+      <rect x="8" y="6" width="8" height="6" rx="0.5" class="screen-color"/>
+      <circle cx="9" cy="15.5" r="1.2" opacity="0.85"/>
+      <rect x="13" y="14.5" width="2.5" height="2" rx="0.4" class="btn" opacity="0.85"/>
       <line x1="8.5" y1="19" x2="15.5" y2="19"/>
     </svg>`,
-    gba: `<svg viewBox="0 0 24 24" fill="none" stroke="${C}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="2" y="6" width="20" height="12" rx="2" fill="none"/>
-      <rect x="8" y="8.5" width="8" height="7" rx="0.5" fill="${C}" fill-opacity="0.25"/>
+    gba: `<svg ${S}>
+      <rect x="2" y="6" width="20" height="12" rx="2"/>
+      <rect x="8" y="8.5" width="8" height="7" rx="0.5" class="screen-color"/>
       <line x1="4" y1="10.5" x2="4" y2="13.5" stroke-width="1.5"/>
       <line x1="2.5" y1="12" x2="5.5" y2="12" stroke-width="1.5"/>
-      <circle cx="19" cy="11" r="0.8" fill="${C}" stroke="none"/>
-      <circle cx="20" cy="13.5" r="0.8" fill="${C}" stroke="none"/>
+      <circle cx="19" cy="11" r="0.8"/><circle cx="20" cy="13.5" r="0.8"/>
     </svg>`,
-    nes: `<svg viewBox="0 0 24 24" fill="none" stroke="${C}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="2" y="7" width="20" height="10" rx="1.5" fill="none"/>
-      <line x1="6" y1="10" x2="6" y2="14"/>
-      <line x1="4" y1="12" x2="8" y2="12"/>
+    nes: `<svg ${S}>
+      <rect x="2" y="7" width="20" height="10" rx="1.5"/>
+      <line x1="6" y1="10" x2="6" y2="14"/><line x1="4" y1="12" x2="8" y2="12"/>
       <line x1="11" y1="13.5" x2="13" y2="13.5" stroke-width="1.4"/>
-      <circle cx="16.5" cy="12" r="0.9" fill="${C}" stroke="none"/>
-      <circle cx="19" cy="12" r="0.9" fill="${C}" stroke="none"/>
+      <circle cx="16.5" cy="12" r="0.9"/><circle cx="19" cy="12" r="0.9"/>
     </svg>`,
-    snes: `<svg viewBox="0 0 24 24" fill="none" stroke="${C}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M3 13c0-3 2-5 5-5h8c3 0 5 2 5 5 0 2-1 4-3 4h-2.5l-2-1.6h-3l-2 1.6H6c-2 0-3-2-3-4z" fill="none"/>
-      <line x1="6" y1="11" x2="6" y2="13.5"/>
-      <line x1="4.7" y1="12.25" x2="7.3" y2="12.25"/>
-      <circle cx="17" cy="11" r="0.8" fill="${C}" stroke="none"/>
-      <circle cx="19" cy="13" r="0.8" fill="${C}" stroke="none"/>
-      <circle cx="15" cy="13" r="0.8" fill="${C}" stroke="none"/>
-      <circle cx="17" cy="15" r="0.8" fill="${C}" stroke="none"/>
+    snes: `<svg ${S}>
+      <path d="M3 13c0-3 2-5 5-5h8c3 0 5 2 5 5 0 2-1 4-3 4h-2.5l-2-1.6h-3l-2 1.6H6c-2 0-3-2-3-4z"/>
+      <line x1="6" y1="11" x2="6" y2="13.5"/><line x1="4.7" y1="12.25" x2="7.3" y2="12.25"/>
+      <circle cx="17" cy="11" r="0.8"/><circle cx="19" cy="13" r="0.8"/>
+      <circle cx="15" cy="13" r="0.8"/><circle cx="17" cy="15" r="0.8"/>
     </svg>`,
-    ds: `<svg viewBox="0 0 24 24" fill="none" stroke="${C}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="4" y="3" width="16" height="8" rx="1" fill="none"/>
-      <rect x="6" y="4.5" width="12" height="5" rx="0.5" fill="${C}" fill-opacity="0.25"/>
-      <rect x="4" y="13" width="16" height="8" rx="1" fill="none"/>
-      <rect x="6" y="14.5" width="12" height="5" rx="0.5" fill="${C}" fill-opacity="0.18"/>
+    ds: `<svg ${S}>
+      <rect x="4" y="3" width="16" height="8" rx="1"/>
+      <rect x="6" y="4.5" width="12" height="5" rx="0.5" class="screen-color"/>
+      <rect x="4" y="13" width="16" height="8" rx="1"/>
+      <rect x="6" y="14.5" width="12" height="5" rx="0.5" class="screen-dim"/>
       <line x1="3" y1="12" x2="21" y2="12" stroke-width="0.8" opacity="0.5"/>
     </svg>`,
-    tv: `<svg viewBox="0 0 24 24" fill="none" stroke="${C}" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="3" y="5" width="18" height="13" rx="1.5" fill="none"/>
-      <rect x="5.5" y="7" width="13" height="9" rx="0.5" fill="${C}" fill-opacity="0.18"/>
+    tv: `<svg ${S}>
+      <rect x="3" y="5" width="18" height="13" rx="1.5"/>
+      <rect x="5.5" y="7" width="13" height="9" rx="0.5" class="screen-dim"/>
       <line x1="8" y1="20" x2="16" y2="20"/>
-      <circle cx="20" cy="9" r="0.6" fill="${C}" stroke="none"/>
-      <circle cx="20" cy="11" r="0.6" fill="${C}" stroke="none"/>
+      <circle cx="20" cy="9" r="0.6"/><circle cx="20" cy="11" r="0.6"/>
     </svg>`
   };
   return icons[id] || icons.custom;
@@ -246,8 +235,7 @@ function renderConsoleGrid() {
     const el = document.createElement("div");
     const isActive = state.consoleId === c.id;
     el.className = `console-cell ${isActive ? "active" : ""}`;
-    // Genero l'icona col colore corretto direttamente, niente currentColor
-    el.innerHTML = `${consoleIcon(c.id, isActive ? ACCENT : FG_DIM)}<span class="label">${c.label}</span>`;
+    el.innerHTML = `${consoleIcon(c.id)}<span class="label">${c.label}</span>`;
     el.addEventListener("click", () => {
       state.consoleId = c.id;
       Object.assign(state, c.defaults);
