@@ -550,179 +550,32 @@ button { border: none; background: none; cursor: pointer; }
 .help-icon.tip-left .tip { left: -4px; right: auto; transform: none; }
 .help-icon.tip-left .tip::after { left: 8px; transform: none; }
 
-/* Screenshot-aligned plugin layout */
-.chrome,
-.tabs,
-.foot {
-  display: none;
-}
-
-body {
-  background: var(--bg-panel);
-  overflow: hidden;
-}
-
-.ps-panel {
-  height: 100vh;
-  background: var(--bg-panel);
-  border: none;
-  border-radius: 0;
-}
-
-.body {
-  padding: 28px 10px 18px;
-}
-
-.brand {
-  gap: 18px;
-  padding: 0 0 22px 4px;
-}
-
-.brand-logo,
-.brand-logo svg {
-  width: 50px;
-  height: 50px;
-}
-
-.brand-name {
-  font-size: 24px;
-  line-height: 0.95;
-}
-
-.brand-tag {
-  margin-top: 10px;
-  font-size: 14px;
-  line-height: 1.35;
-}
-
-.section {
-  padding: 20px 0;
-}
-
-.section-label {
-  font-size: 14px;
-  margin-bottom: 14px;
-}
-
-.help-icon {
-  width: 18px;
-  height: 18px;
-  font-size: 12px;
-}
-
-.console-grid,
-.bit-grid {
-  gap: 8px;
-}
-
-.console-cell {
-  min-height: 79px;
-  justify-content: center;
-  gap: 10px;
-  padding: 12px 4px 9px;
-}
-
-.console-cell svg {
-  width: 25px;
-  height: 25px;
-  min-width: 25px;
-  min-height: 25px;
-}
-
-.console-cell .label {
-  font-size: 14px;
-}
-
-.bit-cell {
-  min-height: 68px;
-  justify-content: center;
-  gap: 5px;
-}
-
-.bit-cell .bit-num {
-  font-size: 18px;
-}
-
-.bit-cell .bit-sub {
-  font-size: 13px;
-}
-
-.select-shell {
-  min-height: 58px;
-  padding-left: 16px;
-}
-
-.select-native {
-  min-height: 56px;
-  font-size: 16px;
-}
-
-.select-thumb {
-  width: 32px;
-  height: 32px;
-}
-
-.select-thumb svg {
-  width: 32px;
-  height: 32px;
-}
-
-.select-caret {
-  right: 16px;
-}
-
-.help {
-  margin-top: 12px;
-  font-size: 16px;
-  line-height: 1.45;
-}
-
-.swatches {
-  gap: 3px;
-  margin-top: 14px;
-}
-
-.swatch {
-  min-width: 20px;
-  min-height: 43px;
-  border-radius: 2px;
-}
-
-.check-row,
-.toggle-row {
-  font-size: 16px;
-}
-
-.check-box {
-  width: 20px;
-  height: 20px;
-}
-
+/* Scale control (new feature) */
 .scale-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
-  margin-top: 14px;
+  gap: 8px;
+  margin-top: 8px;
   color: var(--text);
-  font-size: 14px;
+  font-size: 11px;
 }
 
 .scale-control {
   display: flex;
   align-items: center;
-  gap: 8px;
-  min-width: 145px;
+  gap: 6px;
 }
 
-.scale-control input {
-  width: 104px;
+.scale-control input[type="range"] {
+  width: 80px;
   accent-color: var(--accent);
 }
 
 #scaleValue {
-  min-width: 26px;
+  min-width: 20px;
   color: var(--accent);
   font-weight: 700;
+  font-size: 11px;
   text-align: right;
 }

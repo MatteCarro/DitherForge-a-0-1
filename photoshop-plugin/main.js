@@ -309,11 +309,13 @@ function renderSwatches() {
     s.style.background = c;
     pt.appendChild(s);
   });
-  palette.colors.slice(0, 28).forEach((c) => {
+  const list = palette.colors.slice(0, 28);
+  list.forEach((c) => {
     const s = document.createElement("div");
     s.className = "swatch"; s.style.background = c; s.title = c;
     sw.appendChild(s);
   });
+  sw.style.gridTemplateColumns = `repeat(${Math.min(14, Math.max(7, Math.ceil(list.length / 2)))}, 1fr)`;
 }
 
 function updateSummary() {
